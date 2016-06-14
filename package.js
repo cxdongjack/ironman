@@ -49,6 +49,8 @@ Package.onUse(function (api) {
   //Templates
   api.addFiles("client/templates/addGuestForm/addGuestForm.html", "client");
   api.addFiles("client/templates/addGuestForm/addGuestForm.js", "client");
+  api.addFiles("client/templates/orders/orders.html", "client");
+  api.addFiles("client/templates/orders/orders.js", "client");
 
   api.addFiles("client/templates/static/aboutus.html", "client");
   api.addFiles("client/templates/static/aboutus.js", "client");

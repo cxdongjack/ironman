@@ -18,6 +18,18 @@ ReactionCore.registerPackage({
       container: "accounts",
       template: "addGuestForm",
       priority: 2
+    },
+    {
+      route: "/dashboard/query",
+      name: "dashboard/query",
+      template: "ordersIronman",
+      workflow: "coreWorkflow"
+    },
+    {
+      route: "/dashboard/query",
+      name: "dashboard/query",
+      provides: "shortcut",
+      icon: "fa fa-sun-o"
     }
   ],
   layout: [{

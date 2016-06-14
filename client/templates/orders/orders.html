@@ -1,0 +1,36 @@
+<template name="ordersIronman">
+  {{#each product in products}}
+  <span class="label {{activeClassname product._id}}" data-product="{{product._id}}">{{product.title}}</span>
+  {{/each}}
+  {{#if hasPermission 'orders'}}
+    <div class="container-fluid-sm">
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>#</th>
+                  <th>名称</th>
+                  <th>赛事</th>
+                  <th>手机号</th>
+              </tr>
+          </thead>
+          <tbody>
+              {{#each order in orders}}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{order._id}}</td>
+                    <td>{{order.userId}}</td>
+                    <td>{{order.email}}</td>
+                </tr>
+              {{else}}
+                <div class="empty-view-message">
+                    <i class="fa fa-sun-o"></i>
+                    <p data-i18n="order.ordersNotFound">No Orders Found</p>
+                </div>
+              {{/each}}
+          </tbody>
+      </table>
+
+    </div>
+  {{/if}}
+</template>
+
