@@ -19,6 +19,10 @@ const OrderHelper =  {
       query['items.productId'] = filter.get('product');
     }
 
+    if (filter.get('search')) {
+      _.extend(query, filter.get('search'));
+    }
+
     return query;
   }
 };
@@ -73,12 +77,19 @@ Template.ordersIronman.helpers({
     }
     return 'label-default';
   }
-});
+} );
 
 Template.ordersIronman.events({
   "click [data-product]": (event, instance) => {
     event.preventDefault();
     const id = event.currentTarget.getAttribute("data-product");
     instance.filter.set("product", id);
+  },
+
+  "submit form": (event, instance) => {
+    event.preventDefault();
+    const val = $('input', event.currentTarget).val();
+    instance.filter.set("search", { $or: [ { userId: val }, { email: { $regex: val } }]} );
   }
+
 });

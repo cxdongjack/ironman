@@ -1,4 +1,10 @@
 <template name="ordersIronman">
+  <form class="form-inline">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="手机/姓名/身份证">
+    </div>
+    <button type="submit" class="btn btn-default">搜索</button>
+  </form>
   {{#each product in products}}
   <span class="label {{activeClassname product._id}}" data-product="{{product._id}}">{{product.title}}</span>
   {{/each}}
