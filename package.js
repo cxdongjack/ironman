@@ -52,6 +52,10 @@ Package.onUse(function (api) {
   api.addFiles("client/templates/orders/orders.html", "client");
   api.addFiles("client/templates/orders/orders.js", "client");
 
+  // User profile
+  api.addFiles("client/templates/profile/profile.html", "client");
+  api.addFiles("client/templates/profile/profile.js", "client");
+
   api.addFiles("client/templates/static/aboutus.html", "client");
   api.addFiles("client/templates/static/aboutus.js", "client");
 });
