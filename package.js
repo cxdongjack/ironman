@@ -1,5 +1,5 @@
 Package.describe({
-  name: "ironman:ironman-accounts",
+  name: "ironman:ironman",
   summary: "Bee's Knees Custom Store",
   version: "0.1.0"
 });
@@ -31,6 +31,9 @@ Package.onUse(function (api) {
 
   //Reaction package dependencies
   api.use("reactioncommerce:core@0.13.0");
+
+
+  api.addFiles("common/schemas/person.js");
 
   // Server files
   api.addFiles("server/register.js", "server");

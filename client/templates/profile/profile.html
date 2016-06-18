@@ -3,7 +3,27 @@
   <div class="flex flex-column flex-align-center flex-2x container-lg">
 
     <div class="flex-item">
-      {{> addressBookPanel}}
+
+      {{#autoForm schema="ReactionCore.Schemas.Person" id="accountPersonAddForm" type="normal"}}
+        <fieldset>
+          <div class="row">
+            <div class="col-md-6 form-group{{#if afFieldIsInvalid name='fullName'}} has-error{{/if}}">
+                <label class="control-label">{{afFieldLabelText name='fullName'}}</label>
+                {{>afFieldInput name="fullName" value=fullName autofocus=''}}
+                {{#if afFieldIsInvalid name="fullName"}}
+                <span class="help-block">{{afFieldMessage name="fullName"}}</span>
+                {{/if}}
+            </div>
+          </div>
+          <div class="row text-right">
+            <button type="submit" class="btn btn-primary" data-i18n="app.saveAndContinue" data-event-action="saveAddress">Save and continue</button>
+            {{#if hasAddressBookEntries}}
+            <button type="reset" class="btn btn-default" data-i18n="app.cancel" data-event-action="cancelAddressEdit">Cancel</button>
+            {{/if}}
+          </div>
+        </fieldset>
+      {{/autoForm}}
+
     </div>
 
   </div>

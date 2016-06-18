@@ -62,3 +62,14 @@ Template.accountPersonIronman.helpers({
     return "addressBookAdd";
   }
 });
+
+AutoForm.hooks({
+  accountPersonAddForm: {
+    onSubmit: function (insertDoc) {
+      this.event.preventDefault();
+
+      console.log(insertDoc);
+      this.done();
+    }
+  }
+});
