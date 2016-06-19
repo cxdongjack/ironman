@@ -33,10 +33,9 @@ describe("profilePersonUpsert", function () {
       // insert
       const personal = faker.reaction.personal();
       personal.fullName = 'testName';
-      expect(account.profile.personal.fullName).toBeUndefined();
+      expect(account.profile.personal).toBeUndefined();
       Meteor.call("accounts/personalUpsert", personal);
       account = ReactionCore.Collections.Accounts.findOne(account._id);
-      console.log('account', account);
       expect(account.profile.personal.fullName).toEqual('testName');
 
       //// update

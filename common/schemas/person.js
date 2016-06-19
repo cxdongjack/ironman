@@ -5,18 +5,15 @@
 ReactionCore.Schemas.Person = new SimpleSchema({
   _id: {
     type: String,
-    defaultValue: Random.id(),
     optional: true
   },
   fullName: {
     type: String,
-    label: "Full name",
-     optional: true
+    label: "Full name"
   },
   phone: {
     type: String,
-    label: "Phone",
-     optional: true
+    label: "Phone"
   },
 });
 
