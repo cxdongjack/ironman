@@ -26,19 +26,20 @@ describe("profilePersonUpsert", function () {
   it(
     "should allow user to upsert its personal",
     done => {
-      return done();
       let account = Factory.create("account");
+
       spyOn(Meteor, "userId").and.returnValue(account.userId);
 
       // insert
       const personal = faker.reaction.personal();
       personal.fullName = 'testName';
-      expect(account.profile.personal).toBeUndefined();
+      expect(account.profile.personal.fullName).toBeUndefined();
       Meteor.call("accounts/personalUpsert", personal);
       account = ReactionCore.Collections.Accounts.findOne(account._id);
+      console.log('account', account);
       expect(account.profile.personal.fullName).toEqual('testName');
 
-      // update
+      //// update
       personal.fullName = 'testName2';
       Meteor.call("accounts/personalUpsert", personal);
       account = ReactionCore.Collections.Accounts.findOne(account._id);
@@ -51,15 +52,12 @@ describe("profilePersonUpsert", function () {
   it(
     "should allow Admin to upsert personal to other users",
     done => {
-      return done();
-
       let account = Factory.create("account");
       spyOn(ReactionCore, "hasPermission").and.returnValue(true);
 
       // insert
       const personal = faker.reaction.personal();
       personal.fullName = 'testName';
-      expect(account.profile.personal).toBeUndefined();
       Meteor.call("accounts/personalUpsert", personal, account.userId);
       account = ReactionCore.Collections.Accounts.findOne(account._id);
       expect(account.profile.personal.fullName).toEqual('testName');
@@ -83,9 +81,10 @@ describe("profilePersonUpsert", function () {
         return Meteor.call("accounts/personalUpsert", 123456);
       }).toThrow();
 
-      expect(function () {
-        return Meteor.call("accounts/personalUpsert", {});
-      }).toThrow();
+      // 目前所有参数都是可选的
+      //expect(function () {
+        //return Meteor.call("accounts/personalUpsert", {});
+      //}).toThrow();
 
       expect(function () {
         return Meteor.call("accounts/personalUpsert", null);

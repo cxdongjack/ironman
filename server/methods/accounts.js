@@ -54,5 +54,43 @@ Meteor.methods({
     }
     return true;
   },
+  /**
+   * accounts/personalUpsert
+   * @description update existing address in user's profile
+   * @param {Object} address - address
+   * @param {String|null} [accountUserId] - `account.userId` used by admin to
+   * edit users
+   * @param {shipping|billing} [type] - name of selected address type
+   * @return {Number} The number of affected documents
+   */
+  "accounts/personalUpsert": function (personal, accountUserId) {
+    check(personal, ReactionCore.Schemas.Person);
+    check(accountUserId, Match.Optional(String));
+
+    // security, check for admin access.
+    if (typeof accountUserId === "string") { // if this will not be a String -
+      // `check` will not pass it.
+      if (!ReactionCore.hasAdminAccess()) {
+        throw new Meteor.Error(403, "Access denied");
+      }
+    }
+    this.unblock();
+
+    const userId = accountUserId || Meteor.userId();
+    // required default id
+    if (!personal._id) {
+      personal._id = Random.id();
+    }
+    // clean schema
+    ReactionCore.Schemas.Person.clean(personal);
+
+    return ReactionCore.Collections.Accounts.upsert({
+      userId: userId
+    }, {
+      $set: {
+        "profile.personal": personal
+      }
+    });
+  },
 
 });
