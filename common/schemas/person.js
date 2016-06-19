@@ -12,6 +12,10 @@ ReactionCore.Schemas.Person = new SimpleSchema({
     type: String,
     label: "Full name"
   },
+  phone: {
+    type: String,
+    label: "Phone"
+  },
 });
 
 // /**

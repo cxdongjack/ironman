@@ -62,3 +62,20 @@ Package.onUse(function (api) {
   api.addFiles("client/templates/static/aboutus.html", "client");
   api.addFiles("client/templates/static/aboutus.js", "client");
 });
+
+Package.onTest(function (api) {
+  api.use("sanjo:jasmine@0.21.0");
+  api.use("ecmascript");
+  api.use("random");
+
+  api.use("underscore");
+  api.use("velocity:html-reporter@0.9.1");
+  api.use("velocity:console-reporter@0.1.4");
+
+  api.use("reactioncommerce:core");
+  api.use("reactioncommerce:reaction-factories@0.4.2");
+  api.use("ironman:ironman");
+
+  // server integration tests
+  api.addFiles("tests/jasmine/server/integration/methods.js", "server");
+});
