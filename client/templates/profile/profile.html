@@ -1,10 +1,10 @@
-<template name="accountPersonIronman">
+<template name="accountPersonalIronman">
 
   <div class="flex flex-column flex-align-center flex-2x container-lg">
 
     <div class="flex-item">
 
-      {{#autoForm schema="ReactionCore.Schemas.Person" id="accountPersonAddForm" type="normal"}}
+      {{#autoForm schema="ReactionCore.Schemas.Personal" id="accountPersonalAddForm" type="normal"}}
         <fieldset>
           <div class="row">
             <div class="col-md-6 form-group{{#if afFieldIsInvalid name='fullName'}} has-error{{/if}}">
@@ -15,6 +15,16 @@
                 {{/if}}
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-4 form-group{{#if afFieldIsInvalid name='phone'}} has-error{{/if}}">
+              <label class="control-label">{{afFieldLabelText name='phone'}}</label>
+              {{>afFieldInput name="phone"}}
+              {{#if afFieldIsInvalid name="phone"}}
+              <span class="help-block">{{afFieldMessage name="phone"}}</span>
+              {{/if}}
+            </div>
+          </div>
+
           <div class="row text-right">
             <button type="submit" class="btn btn-primary" data-i18n="app.saveAndContinue" data-event-action="saveAddress">Save and continue</button>
             {{#if hasAddressBookEntries}}

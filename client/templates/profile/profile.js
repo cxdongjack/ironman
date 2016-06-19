@@ -1,7 +1,7 @@
 /**
  * onCreated: Account Profile View
  */
-Template.accountPersonIronman.onCreated(() => {
+Template.accountPersonalIronman.onCreated(() => {
   let template = Template.instance();
 
   template.userHasPassword = ReactiveVar(false);
@@ -14,7 +14,7 @@ Template.accountPersonIronman.onCreated(() => {
 /**
  * Helpers: Account Profile View
  */
-Template.accountPersonIronman.helpers({
+Template.accountPersonalIronman.helpers({
 
   /**
    * User has password
@@ -64,7 +64,7 @@ Template.accountPersonIronman.helpers({
 });
 
 AutoForm.hooks({
-  accountPersonAddForm: {
+  accountPersonalAddForm: {
     onSubmit: function (insertDoc) {
       this.event.preventDefault();
 

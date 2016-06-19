@@ -1,8 +1,8 @@
 /**
-* Iron Person
+* Iron Personal
 */
 
-ReactionCore.Schemas.Person = new SimpleSchema({
+ReactionCore.Schemas.Personal = new SimpleSchema({
   _id: {
     type: String,
     optional: true
@@ -66,7 +66,7 @@ ReactionCore.Schemas.Person = new SimpleSchema({
      optional: true
    },
    "profile.personal": {
-     type: ReactionCore.Schemas.Person,
+     type: ReactionCore.Schemas.Personal,
      optional: true
    },
    "metafields": {

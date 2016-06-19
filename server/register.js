@@ -35,12 +35,11 @@ ReactionCore.registerPackage({
       provides: "shortcut",
       icon: "fa fa-sun-o"
     },
-    // 手动增加账号
     {
-      route: "/account/person",
-      template: "accountPersonIronman",
-      name: "account/person",
-      label: "Person",
+      route: "/account/personal",
+      template: "accountPersonalIronman",
+      name: "account/personal",
+      label: "Personal",
       icon: "fa fa-user",
       provides: "userAccountDropdown"
     }

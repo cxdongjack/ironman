@@ -64,7 +64,7 @@ Meteor.methods({
    * @return {Number} The number of affected documents
    */
   "accounts/personalUpsert": function (personal, accountUserId) {
-    check(personal, ReactionCore.Schemas.Person);
+    check(personal, ReactionCore.Schemas.Personal);
     check(accountUserId, Match.Optional(String));
 
     // security, check for admin access.
@@ -82,7 +82,7 @@ Meteor.methods({
       personal._id = Random.id();
     }
     // clean schema
-    ReactionCore.Schemas.Person.clean(personal);
+    ReactionCore.Schemas.Personal.clean(personal);
 
     return ReactionCore.Collections.Accounts.upsert({
       userId: userId
