@@ -3,8 +3,7 @@
   <div class="flex flex-column flex-align-center flex-2x container-lg">
 
     <div class="flex-item">
-
-      {{#autoForm schema="ReactionCore.Schemas.Personal" id="accountPersonalAddForm" type="normal"}}
+      {{#autoForm schema="ReactionCore.Schemas.Personal" id="accountPersonalAddForm" doc=personal type="normal"}}
         <fieldset>
           <div class="row">
             <div class="col-md-6 form-group{{#if afFieldIsInvalid name='fullName'}} has-error{{/if}}">

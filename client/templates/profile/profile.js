@@ -42,12 +42,13 @@ Template.accountPersonalIronman.helpers({
     }
   },
 
-  /**
-   * User's account profile
-   * @return {Object} account profile
-   */
-  account() {
-    return ReactionCore.Collections.Accounts.findOne();
+  personal() {
+    let account = ReactionCore.Collections.Accounts.findOne({userId: Meteor.userId()});
+    let personal = {};
+    try {
+      personal = account.profile.personal;
+    } catch(e) {}
+    return personal;
   },
 
   /**
@@ -69,7 +70,17 @@ AutoForm.hooks({
       this.event.preventDefault();
 
       console.log(insertDoc);
-      this.done();
+
+      Meteor.call("accounts/personalUpsert", insertDoc, (error, result) => {
+        if (error) {
+          Alerts.toast("编辑信息出错啦", "error");
+          this.done(new Error(error));
+          return false;
+        }
+        if (result) {
+          this.done();
+        }
+      });
     }
   }
 });
