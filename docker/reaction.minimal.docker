@@ -1,0 +1,11 @@
+FROM debian:jessie
+MAINTAINER Tom De Caluwé <decaluwe.t@gmail.com>
+
+# build script directories
+ENV APP_SOURCE_DIR "/var/src"
+ENV APP_BUNDLE_DIR "/var/www"
+
+RUN bash cd $APP_SOURCE_DIR && \
+	mkdir -p $APP_BUNDLE_DIR && \
+	bash meteor build --directory $APP_BUNDLE_DIR
+
