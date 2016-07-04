@@ -1,5 +1,10 @@
 FROM registry.aliyuncs.com/ironman/env
 
+# build script directories
+ENV APP_SOURCE_DIR "/var/src"
+ENV APP_BUNDLE_DIR "/var/www"
+ENV BUILD_SCRIPTS_DIR "/opt/reaction"
+
 # install 
 RUN bash cd $APP_SOURCE_DIR && \
     git pull && git submodule update && \
