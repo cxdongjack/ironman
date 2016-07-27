@@ -1,3 +1,5 @@
+import * as Collections from "/lib/collections";
+
 /**
  * Reaction Account Methods
  */
@@ -92,5 +94,56 @@ Meteor.methods({
       }
     });
   },
+  /**
+   *  order/createOrder
+   *  @summary add items to order
+   *  @param {String} productId - productId to add to Cart
+   *  @param {String} variantId - product variant _id
+   *  @param {Number} [itemQty] - qty to add to cart
+   *  @return {Number|Object} Mongo insert response
+   */
+  "order/createOrder": function (productId, variantId) {
+    check(productId, String);
+    check(variantId, Array);
+
+    const order = {workflow: {}};
+    // userId
+    order.userId = this.userId;
+
+    // set new workflow status
+    order.workflow.status = "new";
+    order.workflow.workflow = ["coreOrderWorkflow/created"];
+
+    // items
+    let product;
+    let variants = [];
+    Collections.Products.find(
+      { _id: { $in: [productId].concat(variantId)}})
+    .forEach(doc => {
+      if (doc.type === "simple") {
+        product = doc;
+      } else {
+        variants.push(doc);
+      }
+    });
+
+    order.items = variants.map(function(variant) {
+      return {
+        _id: Random.id(),
+        shopId: product.shopId,
+        productId: productId,
+        quantity: 1,
+        variants: variant,
+        title: product.title,
+        type: product.type
+      };
+    });
+
+    // insert new reaction order
+    const orderId = Collections.Orders.insert(order);
+
+    return Collections.Orders.findOne(orderId);
+  },
+
 
 });
